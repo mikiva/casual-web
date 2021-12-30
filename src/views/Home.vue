@@ -1,5 +1,5 @@
 <template>
-<h3>Här kan man vara</h3>
+<h3>Casual</h3>
 </template>
 
 <script lang="ts">

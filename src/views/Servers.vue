@@ -1,24 +1,21 @@
 <template>
   <div class="card">
+    <div class="row">
+      <h2>Servers</h2>
+    </div>
     <div class="list">
-      <div class="list-item">
-        <div class="flex-4">
-          <div>Server Alias</div>
-        </div>
-        <div class="flex-2">Instances</div>
-      </div>
       <server-list-item
-        :server="server"
-        v-for="server in servers"
-        :key="server.id"
+          :server="server"
+          v-for="server in servers"
+          :key="server.id"
       ></server-list-item>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
-import { useStore } from "vuex";
+import {defineComponent, computed} from "vue";
+import {useStore} from "vuex";
 import ServerListItem from "@/components/ServerListItem.vue";
 
 export default defineComponent({

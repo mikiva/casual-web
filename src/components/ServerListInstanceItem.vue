@@ -7,15 +7,18 @@
     <div class="flex-1">{{ i.handle?.pid || i.handle }}</div>
     <div class="flex-2" v-if="i.handle.ipc">{{ ipc }}</div>
     <div class="flex-1">
-      <div class="pill-list">
-        <span class="pill">{{ state }}</span>
-      </div>
+      <pill>{{ state }}</pill>
     </div>
   </div>
 </template>
 <script>
-import { computed, defineComponent, toRef } from "vue";
+import {computed, defineComponent, toRef} from "vue";
+import Pill from "@/components/Shared/Pill.vue";
+
 export default defineComponent({
+  components: {
+    Pill
+  },
   props: {
     instance: {
       type: Object,
@@ -38,14 +41,14 @@ export default defineComponent({
       const ipc = i.value.handle?.ipc;
       let decoded = ipc;
       decoded = atob(ipc)
-        .split("")
-        .map(function (aChar) {
-          return ("0" + aChar.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("");
+          .split("")
+          .map(function (aChar) {
+            return ("0" + aChar.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("");
       return decoded;
     });
-      return { i, state, ipc };
+    return {i, state, ipc};
   },
 });
 </script>

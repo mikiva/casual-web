@@ -1,23 +1,22 @@
 <template>
-  <div id="nav" class="topnav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/servers">Servers</router-link>
-    <router-link to="/servers/instances">Servers Instances</router-link>
-    <router-link to="/executables">Executables</router-link>
-    <router-link to="/executables/instances">Executables Instances</router-link>
-    <router-link to="/groups">Groups</router-link>
-    <router-link to="/services">Services</router-link>
-  </div>
+  <topnav></topnav>
+  <sidenav></sidenav>
   <div class="content">
-    <router-view :key="$route.path" />
+    <router-view :key="$route.path"/>
   </div>
 </template>
 
 <script>
-import { defineComponent, provide, reactive } from "vue";
-//import store from "@/store";
-import { useStore } from "vuex";
+import {defineComponent, provide, reactive} from "vue";
+import {useStore} from "vuex";
+import Topnav from "@/components/nav/Topnav.vue";
+import Sidenav from "@/components/nav/Sidenav.vue";
+
 export default defineComponent({
+  components: {
+    Topnav,
+    Sidenav,
+  },
   setup() {
     const store = useStore();
     store.dispatch("fetchCasualData");

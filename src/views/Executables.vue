@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="list">
-      <div class="list-item">
+      <div class="list-item header">
         <div class="flex-4">
           <div>Server Alias</div>
         </div>

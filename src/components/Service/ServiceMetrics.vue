@@ -1,17 +1,18 @@
 <template>
-<div class="pill-list">
-
-  <service-metric-pill>Invoked: {{    service.metric?.invoked?.count  }}</service-metric-pill>
-  <service-metric-pill>Total time: {{    service.metric?.invoked?.total  }}</service-metric-pill>
-</div>
+  <pills class="pill-list">
+    <pill>Invoked: {{ service.metric?.invoked?.count }}</pill>
+    <pill>Total time: {{ service.metric?.invoked?.total }}</pill>
+  </pills>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import ServiceMetricPill from "@/components/Service/ServiceMetricPill.vue";
+import {defineComponent} from "vue";
+import Pills from "@/components/Shared/Pills.vue";
+import Pill from "@/components/Shared/Pill.vue";
 
 export default defineComponent({
   components: {
-    ServiceMetricPill,
+    Pills,
+    Pill,
   },
   props: {
     service: Object,

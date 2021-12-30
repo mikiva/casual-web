@@ -1,9 +1,26 @@
+@import "variables";
+
+
+@font-face {
+  font-family: "Roboto Regular";
+  src: url("../fonts/roboto/Roboto-Regular.ttf") format("woff");
+}
+
 html, body {
-    font-family: monospace;
-    margin: 0;
-    padding: 0;
+  font-family: monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: $color-light-background;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
 }
 
 .content {
-    padding: 1rem;
+  margin-top: $topnav-height;
+  margin-left: $sidenav-width;
+  padding: 1em;
+  background-color: $color-light-background;
 }
