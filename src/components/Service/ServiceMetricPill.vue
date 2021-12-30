@@ -1,0 +1,5 @@
+<template>
+  <span class="pill">
+    <slot></slot>
+  </span>
+</template>
