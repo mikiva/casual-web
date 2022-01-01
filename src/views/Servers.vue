@@ -4,6 +4,7 @@
       <h2>Servers</h2>
     </div>
     <div class="list">
+      <div class="list-item header"></div>
       <server-list-item
           :server="server"
           v-for="server in servers"
@@ -23,9 +24,6 @@ export default defineComponent({
   components: { ServerListItem },
   setup() {
     const store = useStore();
-    console.log(store.getters);
-    //const servers = computed(() => store.getters.servers);
-
     return {
       servers: computed(() => store.getters.servers),
       instances: computed(() => store.getters.serverInstances),

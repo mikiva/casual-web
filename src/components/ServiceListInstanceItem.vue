@@ -1,15 +1,17 @@
 <template>
-  <div class="list-item">
-    <div class="row">
+  <div class="card">
+    <div class="list-item">
+      <div class="row">
 
-      <div class="flex-2">
-        <h4>{{ i.alias }}</h4>
-        <div>{{ i.pid }}</div>
-      </div>
-      <div class="flex-1">{{ i.handle?.pid || i.handle }}</div>
-      <div class="flex-2" v-if="i.handle.ipc">{{ ipc }}</div>
-      <div class="flex-1">
-        <pill>{{ state }}</pill>
+        <div class="flex-2">
+          <h4>{{ i.alias }}</h4>
+          <div>{{ i.pid }}</div>
+        </div>
+        <div class="flex-1">{{ i.handle?.pid || i.handle }}</div>
+        <div class="flex-2" v-if="i.handle.ipc">{{ ipc }}</div>
+        <div class="flex-1">
+          <pill>{{ state }}</pill>
+        </div>
       </div>
     </div>
   </div>
@@ -19,14 +21,11 @@ import { computed, defineComponent, toRef } from "vue";
 import Pill from "@/components/Shared/Pill.vue";
 
 enum State {
-  running,
-  spawned,
-  scale_out,
-  scale_in,
-  exit,
-  error,
+  "Running",
+  "Busy"
+
+
 }
-;
 
 export default defineComponent({
   components: {
@@ -42,7 +41,12 @@ export default defineComponent({
     const i = toRef(props, "instance");
 
     const state = computed(() => {
-      return State[i.value.state]
+      switch (i.value.state) {
+        case 0:
+          return "Running";
+        default:
+          return "Unknown";
+      }
     });
     const ipc = computed(() => {
       const ipc = i.value.handle?.ipc;

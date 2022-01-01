@@ -1,12 +1,11 @@
 <template>
   <div class="card">
+    <div class="row">
+      <h2>Executable Instances</h2>
+
+    </div>
     <div class="list">
-      <div class="list-item header">
-        <div class="flex-4">
-          <div>Server Alias</div>
-        </div>
-        <div class="flex-2">Instances</div>
-      </div>
+      <div class="list-item header"></div>
       <server-list-item
         :server="server"
         v-for="server in servers"
@@ -26,9 +25,6 @@ export default defineComponent({
   components: { ServerListItem },
   setup() {
     const store = useStore();
-    console.log(store.getters);
-    //const servers = computed(() => store.getters.servers);
-
     return {
       servers: computed(() => store.getters.executables),
       instances: computed(() => store.getters.serverInstances),

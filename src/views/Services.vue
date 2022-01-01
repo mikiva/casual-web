@@ -10,24 +10,43 @@
           <input type="checkbox" id="admin-services" v-model="showAdmin">
           <label for="admin-services">Show admin services</label>
         </div>
-          <service-list-item
-              :service="service"
-              v-for="service in services"
-              :key="service.id"
-          ></service-list-item>
+        <div class="row">
+          <div class="list-item header">
+            <div class="row center-height">
+              <div class="flex-3">
+                Name
+              </div>
+              <div class="flex-1">
+                Category
+              </div>
+              <div class="flex-1">
+                Mode
+              </div>
+              <div class="flex-1">
+                Contract
+              </div>
+
+            </div>
+          </div>
         </div>
+        <service-list-item
+            :service="service"
+            v-for="service in services"
+            :key="service.id"
+        ></service-list-item>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, reactive, ref} from "vue";
-import {useStore} from "vuex";
+import { defineComponent, computed, reactive, ref } from "vue";
+import { useStore } from "vuex";
 import ServiceListItem from "@/components/ServiceListItem.vue";
 
 export default defineComponent({
   name: "Services",
-  components: {ServiceListItem},
+  components: { ServiceListItem },
   setup() {
     const store = useStore();
     const showAdmin = ref(false)
@@ -35,11 +54,13 @@ export default defineComponent({
     const services = computed(() => {
       let serv = store.getters.services
       if (!showAdmin.value)
-        serv = serv.filter((s) => s['category'] !== ".admin")
-      return serv
+        serv = serv.filter(
+          (s) => ![".admin", ".deprecated"].includes(s["category"])
+        );
+      return serv;
     });
 
-    return {services, showAdmin};
+    return { services, showAdmin };
   },
 });
 </script>

@@ -5,11 +5,44 @@
 
   .list-item {
     display: flex;
-    padding: 10px 5px;
+    padding: 7px 5px;
     flex: 1;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    position: relative;
 
+    &.expandable {
+      &:after {
+        position: absolute;
+        right: 10px;
+        content: "chevron_left";
+        font-family: "Material Icons";
+      }
+
+      &.expanded {
+        padding-bottom: 10px;
+        &:after {
+          content: "expand_more";
+
+        }
+      }
+      .expanded-content {
+        padding: 10px 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .card {
+      margin: 3px 2px;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
     &.header {
       font-weight: bold;
@@ -19,21 +52,21 @@
     }
 
     &.expanded {
-      background-color: $color-light-background;
+      // background-color: $color-light-background;
     }
 
     & > *:not(:last-child) {
-      margin-right: 10px;
+      //   margin-right: 10px;
 
     }
 
     &:not(.header) {
       &:hover {
-        background-color: $color-light-background;
+        //background-color: $color-light-background;
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       }
 
       div[class^="flex"] {
@@ -51,8 +84,8 @@
 
   .list-item-expanded {
     padding: 10px 5px;
-    background-color: $color-light-background;
-    border-bottom: 1px solid rgba(0,0,0,0.4);
+    //  background-color: $color-light-background;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   }
 
   h4 {

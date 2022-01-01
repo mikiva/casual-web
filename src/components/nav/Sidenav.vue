@@ -2,7 +2,7 @@
   <div class="sidenav">
     <div class="sidenav-links">
       <div class="row">
-        <sidenav-nav icon="servers" to="/servers">Servers
+        <sidenav-nav  to="/servers">Servers
           <pill>{{ serverCount }}</pill>
         </sidenav-nav>
       </div>
@@ -10,20 +10,23 @@
         <sidenav-nav to="/servers/instances">Servers Instances</sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav icon="executables" to="/executables">Executables <pill>{{executableCount}}</pill></sidenav-nav>
+        <sidenav-nav  to="/executables">Executables <pill>{{executableCount}}</pill></sidenav-nav>
       </div>
       <div class="row">
         <sidenav-nav to="/executables/instances">Executables Instances</sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav icon="groups" to="/groups">Groups
+        <sidenav-nav  to="/groups">Groups
           <pill>{{ groupCount }}</pill>
         </sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav icon="services" to="/services">Services
+        <sidenav-nav  to="/services">Services
           <pill>{{ serviceCount }}</pill>
         </sidenav-nav>
+      </div>
+      <div class="row">
+        <sidenav-nav  to="/services/instances">Services Instances</sidenav-nav>
       </div>
     </div>
   </div>
@@ -58,7 +61,7 @@ export default defineComponent({
     });
 
 
-    return {serverCount, serviceCount, groupCount, executableCount}
+    return { serverCount, serviceCount, groupCount, executableCount };
   }
 });
 </script>

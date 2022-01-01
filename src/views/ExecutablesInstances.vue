@@ -2,16 +2,18 @@
   <div class="card">
     <div class="list">
       <div class="list-item header">
-        <div class="flex-2">
-          <div>Server Alias</div>
+        <div class="row">
+          <div class="flex-2">
+            <div>Server Alias</div>
+          </div>
+          <div class="flex-1">pid</div>
+          <div class="flex-1">State</div>
         </div>
-        <div class="flex-1">pid</div>
-        <div class="flex-1">State</div>
       </div>
       <server-list-instance-item
-        v-for="(instance, idx) in instances"
-        :key="idx"
-        :instance="instance"
+          v-for="(instance, idx) in instances"
+          :key="idx"
+          :instance="instance"
       >
       </server-list-instance-item>
     </div>
@@ -23,6 +25,7 @@
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import ServerListInstanceItem from "@/components/ServerListInstanceItem.vue";
+
 export default defineComponent({
   name: "Servers",
   components: { ServerListInstanceItem },
