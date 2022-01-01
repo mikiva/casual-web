@@ -1,10 +1,11 @@
 <template>
   <div class="card">
+    <div class="row"><h2>Executable Instances</h2></div>
     <div class="list">
       <div class="list-item header">
         <div class="row">
           <div class="flex-2">
-            <div>Server Alias</div>
+            <div>Alias</div>
           </div>
           <div class="flex-1">pid</div>
           <div class="flex-1">State</div>

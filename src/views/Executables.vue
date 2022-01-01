@@ -1,8 +1,7 @@
 <template>
   <div class="card">
     <div class="row">
-      <h2>Executable Instances</h2>
-
+      <h2>Executables</h2>
     </div>
     <div class="list">
       <div class="list-item header"></div>
