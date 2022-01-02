@@ -1,9 +1,8 @@
 <template>
   <div id="nav" class="topnav">
     <div class="brand">
-      <router-link to="/" v-slot="{navigate}">
-        <img src="@/assets/img/casual_left_BW.svg" alt="" @click="navigate">
-
+      <router-link to="/" v-slot="{ navigate }">
+        <img src="@/assets/img/casual_left_BW.svg" alt="" @click="navigate" />
       </router-link>
     </div>
     <router-link to="/servers">Servers</router-link>
@@ -16,23 +15,18 @@
 </template>
 
 <script>
-import {computed, defineComponent} from "vue";
-
+import { computed, defineComponent } from "vue";
 
 export default defineComponent({
   name: "Topnav",
   setup() {
-
     const img = computed(() => {
       return `@/assets/img/casual_logo_text_lg.svg`;
-    })
+    });
 
-    return {img}
-  }
-
+    return { img };
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

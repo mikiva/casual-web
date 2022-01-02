@@ -3,10 +3,9 @@ import { InformationService } from "@/services";
 import { Service, ServiceInstances } from "@/models";
 
 interface Server {
-  instances: any,
-  alias: string,
+  instances: any;
+  alias: string;
 }
-
 
 export default createStore({
   state: {
@@ -14,7 +13,7 @@ export default createStore({
     executables: [] as Server[],
     groups: [],
     services: [] as Service[],
-    serviceInstances: {} as ServiceInstances
+    serviceInstances: {} as ServiceInstances,
   },
   getters: {
     servers: function (state) {
@@ -24,35 +23,31 @@ export default createStore({
       return function (pid) {
         const servers = state.servers;
         for (const s of servers) {
-          if (s.instances.some((i) => i.handle.pid === pid))
-            return s
+          if (s.instances.some((i) => i.handle.pid === pid)) return s;
         }
         return null;
-
       };
     },
     serverInstances: function (state) {
+      const instances = [] as any[];
 
-      const instances = [] as any[]
-
-      state.servers.forEach(s => {
+      state.servers.forEach((s) => {
         for (const inst of s.instances) {
-          inst['alias'] = s.alias
-          instances.push(inst)
+          inst["alias"] = s.alias;
+          instances.push(inst);
         }
-
-      })
-      return instances
+      });
+      return instances;
     },
     executableInstances: function (state) {
-      const instances = [] as any[]
+      const instances = [] as any[];
 
-      state.executables.forEach(s => {
+      state.executables.forEach((s) => {
         for (const inst of s.instances) {
-          inst['alias'] = s.alias
-          instances.push(inst)
+          inst["alias"] = s.alias;
+          instances.push(inst);
         }
-      })
+      });
       return instances;
     },
     executables: function (state) {
@@ -71,7 +66,6 @@ export default createStore({
       return state.services;
     },
     serviceInstances: function (state, getters) {
-
       const services = state.services;
       const instances = [] as any[];
       services.forEach((service) => {
@@ -121,30 +115,25 @@ export default createStore({
   actions: {
     getDomain: function ({ commit }) {
       return InformationService.getDomain().then((res) => {
-        commit('setServers', res.servers);
-        commit('setExecutables', res.executables);
-        commit('setGroups', res.groups);
-      })
+        commit("setServers", res.servers);
+        commit("setExecutables", res.executables);
+        commit("setGroups", res.groups);
+      });
     },
     getServices: function ({ commit }) {
       return InformationService.getServices().then((res) => {
-        commit('setServices', res.services);
-        commit('setServiceInstances', res.instances);
-      })
+        commit("setServices", res.services);
+        commit("setServiceInstances", res.instances);
+      });
     },
     fetchCasualData: function ({ dispatch }) {
-
-      const domain = dispatch('getDomain')
-      const services = dispatch('getServices')
+      const domain = dispatch("getDomain");
+      const services = dispatch("getServices");
 
       return Promise.all([domain, services]).then((res) => {
-      //  console.log(res)
-
-      })
-
-
-    }
-
+        //  console.log(res)
+      });
+    },
   },
   modules: {},
 });

@@ -8,48 +8,40 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-
     path: "/servers",
     name: "Servers",
-    component: () => import("@/views/Servers.vue")
+    component: () => import("@/views/Servers.vue"),
   },
   {
-
     path: "/servers/instances",
     name: "Servers Instances",
-    component: () => import("@/views/ServersInstances.vue")
+    component: () => import("@/views/ServersInstances.vue"),
   },
   {
-
     path: "/executables",
     name: "Executables",
-    component: () => import("@/views/Executables.vue")
+    component: () => import("@/views/Executables.vue"),
   },
   {
-
     path: "/executables/instances",
     name: "Executables Instances",
-    component: () => import("@/views/ExecutablesInstances.vue")
+    component: () => import("@/views/ExecutablesInstances.vue"),
   },
   {
-
     path: "/groups",
     name: "Groups",
-    component: () => import("@/views/Groups.vue")
+    component: () => import("@/views/Groups.vue"),
   },
   {
-
     path: "/services",
     name: "Services",
-    component: () => import("@/views/Services.vue")
+    component: () => import("@/views/Services.vue"),
   },
   {
-
     path: "/services/instances",
     name: "Services Instances",
-    component: () => import("@/views/ServicesInstances.vue")
-  }
-
+    component: () => import("@/views/ServicesInstances.vue"),
+  },
 ];
 
 const router = createRouter({

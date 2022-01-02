@@ -1,7 +1,6 @@
 <template>
   <div class="list-item">
     <div class="row">
-
       <div class="flex-2">
         <h4>{{ i.alias }}</h4>
         <div>{{ i.pid }}</div>
@@ -26,11 +25,9 @@ enum State {
   exit,
   error,
 }
-;
-
 export default defineComponent({
   components: {
-    Pill
+    Pill,
   },
   props: {
     instance: {
@@ -42,7 +39,7 @@ export default defineComponent({
     const i = toRef(props, "instance");
 
     const state = computed(() => {
-      return State[i.value.state]
+      return State[i.value.state];
     });
     const ipc = computed(() => {
       const ipc = i.value.handle?.ipc;

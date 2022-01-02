@@ -6,17 +6,17 @@
     <div class="list">
       <div class="list-item header"></div>
       <server-list-item
-          :server="server"
-          v-for="server in servers"
-          :key="server.id"
+        :server="server"
+        v-for="server in servers"
+        :key="server.id"
       ></server-list-item>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed} from "vue";
-import {useStore} from "vuex";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import ServerListItem from "@/components/ServerListItem.vue";
 
 export default defineComponent({

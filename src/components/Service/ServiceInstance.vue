@@ -10,12 +10,9 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "ServiceInstances",
   props: {
-    instance: Object
+    instance: Object,
   },
-
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

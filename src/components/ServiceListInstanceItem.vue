@@ -2,7 +2,6 @@
   <div class="card">
     <div class="list-item">
       <div class="row">
-
         <div class="flex-2">
           <h4>{{ i.alias }}</h4>
           <div>{{ i.pid }}</div>
@@ -22,14 +21,12 @@ import Pill from "@/components/Shared/Pill.vue";
 
 enum State {
   "Running",
-  "Busy"
-
-
+  "Busy",
 }
 
 export default defineComponent({
   components: {
-    Pill
+    Pill,
   },
   props: {
     instance: {

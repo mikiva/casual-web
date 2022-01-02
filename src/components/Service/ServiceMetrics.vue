@@ -5,7 +5,7 @@
   </pills>
 </template>
 <script lang="ts">
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 import Pills from "@/components/Shared/Pills.vue";
 import Pill from "@/components/Shared/Pill.vue";
 

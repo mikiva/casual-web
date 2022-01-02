@@ -7,7 +7,6 @@
       <div class="list">
         <div class="list-item header">
           <div class="row">
-
             <div class="flex-2">
               <div>Server Alias</div>
             </div>
@@ -17,15 +16,14 @@
           </div>
         </div>
         <server-list-instance-item
-            v-for="(instance, idx) in instances"
-            :key="idx"
-            :instance="instance"
+          v-for="(instance, idx) in instances"
+          :key="idx"
+          :instance="instance"
         >
         </server-list-instance-item>
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">

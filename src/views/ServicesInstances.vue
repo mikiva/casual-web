@@ -7,7 +7,6 @@
       <div class="list">
         <div class="list-item header">
           <div class="row">
-
             <div class="flex-3">
               <div>Service</div>
             </div>
@@ -18,8 +17,6 @@
         </div>
         <div v-for="(instance, idx) in instances" :key="idx" class="list-item">
           <div class="row">
-
-
             <div class="flex-3">{{ instance.name }}</div>
             <div class="flex-1">{{ instance.pid }}</div>
             <div class="flex-1">
@@ -31,7 +28,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -41,7 +37,7 @@ import Pill from "@/components/Shared/Pill.vue";
 
 enum State {
   idle,
-  busy
+  busy,
 }
 
 export default defineComponent({
@@ -55,10 +51,9 @@ export default defineComponent({
       return State[state];
     };
 
-
     return {
       instances,
-      state
+      state,
     };
   },
 });

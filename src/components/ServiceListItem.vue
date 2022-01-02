@@ -1,5 +1,9 @@
 <template>
-  <div class="list-item expandable" @click="expanded = !expanded" :class="{expanded: expanded}">
+  <div
+    class="list-item expandable"
+    @click="expanded = !expanded"
+    :class="{ expanded: expanded }"
+  >
     <div class="row center-height">
       <div class="flex-3">
         <div>
@@ -32,18 +36,16 @@ import Pill from "@/components/Shared/Pill.vue";
 import ServiceInstance from "@/components/Service/ServiceInstance.vue";
 import { Contract, Service, Transaction } from "@/models";
 
-
-
 export default defineComponent({
   components: {
     Pill,
-    ServiceInstance
+    ServiceInstance,
   },
   props: {
     service: {
-      type:Object as PropType<Service>,
-      required: true
-    }
+      type: Object as PropType<Service>,
+      required: true,
+    },
   },
   setup(props) {
     const store = useStore();
@@ -64,7 +66,6 @@ export default defineComponent({
 
       const inst = sequential.map((se) => store.getters.serverByPid(se.pid));
       return inst;
-
     });
 
     return { s, contract, instances, expanded, transactionMode };

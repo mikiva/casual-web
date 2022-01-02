@@ -1,7 +1,6 @@
 <template>
-  <div class="list-item ">
+  <div class="list-item">
     <div class="row center-height">
-
       <div class="flex-4">
         <div>
           <h4>{{ s.alias }}</h4>
@@ -21,11 +20,10 @@ import { defineComponent, toRef } from "vue";
 import Pills from "@/components/Shared/Pills.vue";
 import Pill from "@/components/Shared/Pill.vue";
 
-
 export default defineComponent({
   components: {
     Pills,
-    Pill
+    Pill,
   },
   props: {
     server: Object,

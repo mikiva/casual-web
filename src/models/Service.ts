@@ -5,13 +5,12 @@ interface Execution {
 }
 
 interface Sequential {
-  pid: number
+  pid: number;
 }
 
 export interface ServiceInstances {
   sequential: Sequential[];
   concurrent: never[];
-
 }
 
 export interface Service {
@@ -20,7 +19,6 @@ export interface Service {
   execution: Execution;
   transaction: number;
 }
-
 
 export enum Contract {
   linger = 0,

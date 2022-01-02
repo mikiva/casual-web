@@ -4,7 +4,7 @@ class HttpConfig {
   static baseurl = "";
 
   public axiosInstance = axios.create({
-    baseURL: HttpConfig.baseurl
+    baseURL: HttpConfig.baseurl,
   });
 }
 export default new HttpConfig().axiosInstance;

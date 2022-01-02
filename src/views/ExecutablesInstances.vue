@@ -12,14 +12,13 @@
         </div>
       </div>
       <server-list-instance-item
-          v-for="(instance, idx) in instances"
-          :key="idx"
-          :instance="instance"
+        v-for="(instance, idx) in instances"
+        :key="idx"
+        :instance="instance"
       >
       </server-list-instance-item>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">

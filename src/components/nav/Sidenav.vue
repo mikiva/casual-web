@@ -2,7 +2,8 @@
   <div class="sidenav">
     <div class="sidenav-links">
       <div class="row">
-        <sidenav-nav  to="/servers">Servers
+        <sidenav-nav to="/servers"
+          >Servers
           <pill>{{ serverCount }}</pill>
         </sidenav-nav>
       </div>
@@ -10,39 +11,45 @@
         <sidenav-nav to="/servers/instances">Servers Instances</sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav  to="/executables">Executables <pill>{{executableCount}}</pill></sidenav-nav>
+        <sidenav-nav to="/executables"
+          >Executables <pill>{{ executableCount }}</pill></sidenav-nav
+        >
       </div>
       <div class="row">
-        <sidenav-nav to="/executables/instances">Executables Instances</sidenav-nav>
+        <sidenav-nav to="/executables/instances"
+          >Executables Instances</sidenav-nav
+        >
       </div>
       <div class="row">
-        <sidenav-nav  to="/groups">Groups
+        <sidenav-nav to="/groups"
+          >Groups
           <pill>{{ groupCount }}</pill>
         </sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav  to="/services">Services
+        <sidenav-nav to="/services"
+          >Services
           <pill>{{ serviceCount }}</pill>
         </sidenav-nav>
       </div>
       <div class="row">
-        <sidenav-nav  to="/services/instances">Services Instances</sidenav-nav>
+        <sidenav-nav to="/services/instances">Services Instances</sidenav-nav>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {computed, defineComponent} from "vue";
+import { computed, defineComponent } from "vue";
 import Pill from "@/components/Shared/Pill.vue";
 import SidenavNav from "@/components/nav/SidenavNav";
-import {useStore} from "vuex";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "Sidenav",
   components: {
     SidenavNav,
-    Pill
+    Pill,
   },
   setup() {
     const store = useStore();
@@ -60,12 +67,9 @@ export default defineComponent({
       return store.getters.groups.length;
     });
 
-
     return { serverCount, serviceCount, groupCount, executableCount };
-  }
+  },
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
