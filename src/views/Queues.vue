@@ -1,6 +1,13 @@
 <template>
   <div class="card">
-    <div class="row"><h2>Queues</h2></div>
+    <div class="row">
+      <h2>Queues</h2>
+      <div>
+        <button class="button-icon large" @click="refresh">
+          <Icon>refresh</Icon>
+        </button>
+      </div>
+    </div>
     <div class="list clickable">
       <div class="list-item header">
         <div class="row">
@@ -19,10 +26,11 @@
 import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
 import QueueListItem from "@/components/QueueListItem.vue";
+import Icon from "@/components/Shared/Icon.vue";
 
 export default defineComponent({
   name: "Queues",
-  components: { QueueListItem },
+  components: { QueueListItem, Icon },
   setup() {
     const store = useStore();
     const expanded = ref(false);
@@ -31,7 +39,12 @@ export default defineComponent({
       return store.getters.queues;
     });
 
-    return { queues, expanded };
+    function refreshQueues() {
+      store.dispatch("fetchQueues");
+
+    }
+
+    return { queues, expanded, refresh: refreshQueues };
   },
 });
 </script>

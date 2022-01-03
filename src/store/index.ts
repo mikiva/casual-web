@@ -7,6 +7,11 @@ interface Server {
   alias: string;
 }
 
+interface Queue {
+  name: string;
+  messages: never[];
+}
+
 export default createStore({
   strict: true,
   state: {
@@ -15,7 +20,8 @@ export default createStore({
     groups: [],
     services: [] as Service[],
     serviceInstances: {} as ServiceInstances,
-    queues: []
+    queues: [] as Queue[],
+    queueMessages: {}
   },
   getters: {
     servers: function (state) {
@@ -107,6 +113,16 @@ export default createStore({
     queues: function (state) {
       return state.queues;
     },
+    queueByName: function (state) {
+      return function (name) {
+        return state.queues.find((q) => q.name === name);
+      }
+    },
+    queueMessages: function (state) {
+      return function (name) {
+        return state.queueMessages[name]
+      };
+    }
   },
   mutations: {
     setServers: function (state, payload) {
@@ -130,6 +146,16 @@ export default createStore({
       });
       state.queues = payload;
     },
+    setQueueMessages: function (state, payload) {
+      const queue = state.queues.find((q) => q.name === payload.name) || {};
+      queue["messages"] = payload.messages;
+      console.log(queue["messages"])
+//      state.queueMessages[payload.name] = payload.messages;
+    },
+    clearQueueMessages: function (state) {
+      state.queueMessages = {};
+
+    }
   },
   actions: {
     fetchDomain: function ({ commit }) {
@@ -148,6 +174,15 @@ export default createStore({
     fetchQueues: function ({ commit }) {
       return InformationService.getQueues().then((res) => {
         commit("setQueues", res.queues);
+        commit("clearQueueMessages")
+      });
+    },
+    fetchQueueMessages: function ({ commit, getters }, payload) {
+      const queue = getters.queueByName(payload.name);
+      if (queue["messages"])
+        return;
+      return InformationService.getQueueMessages(payload.name).then((res) => {
+        commit("setQueueMessages", { name: payload.name, messages: res })
       });
     },
     fetchCasualData: function ({ dispatch }) {

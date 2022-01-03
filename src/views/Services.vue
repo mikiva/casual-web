@@ -1,7 +1,10 @@
 <template>
   <div class="card">
     <div class="row">
-      <h2 class="flex-1">Services</h2>
+      <h2>Services</h2>
+      <button class="button-icon large" @click="refresh">
+        <Icon>refresh</Icon>
+      </button>
 
     </div>
     <div class="row">
@@ -34,10 +37,10 @@
 import { defineComponent, computed, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import ServiceListItem from "@/components/ServiceListItem.vue";
-
+import Icon from "@/components/Shared/Icon.vue";
 export default defineComponent({
   name: "Services",
-  components: { ServiceListItem },
+  components: { ServiceListItem, Icon },
   setup() {
     const store = useStore();
     const showAdmin = ref(false);
@@ -55,7 +58,11 @@ export default defineComponent({
       return store.getters.adminServices;
     });
 
-    return { services, showAdmin, adminServices };
+    function refreshServices() {
+      store.dispatch("fetchServices");
+    }
+
+    return { services, showAdmin, adminServices, refresh: refreshServices };
   },
 });
 </script>

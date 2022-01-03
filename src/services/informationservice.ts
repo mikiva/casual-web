@@ -16,6 +16,16 @@ class InformationServiceImpl {
     const result = await http.post("/casual/.casual/queue/state", {});
     return result.data?.result;
   }
+
+  async getQueueMessages(name) {
+    const result = await http.post("/casual/.casual/queue/messages/list", {
+      queue: name,
+    });
+
+    return result.data?.result;
+
+  }
+
 }
 
 export const InformationService = new InformationServiceImpl();

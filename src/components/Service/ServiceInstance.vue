@@ -1,11 +1,11 @@
 <template>
   <div>
-    <strong>{{ instance.alias }}</strong> <i>ipc:</i>{{ ipc }}
+    <strong>{{ instance.alias }}</strong> <i>ipc:</i>{{ $fromBase64(instance.ipc) }}
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ServiceInstances",
@@ -15,17 +15,6 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
-    const { instance } = toRefs(props);
-    const ipc = computed(() => {
-      const decoded = Buffer.from(
-          instance?.value?.ipc,
-          "base64"
-      ).toString("hex");
-      return decoded;
-    });
-    return { ipc }
-  }
 });
 </script>
 
