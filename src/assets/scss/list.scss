@@ -3,7 +3,7 @@
   flex-direction: column;
   flex: 1;
   &.clickable {
-    .list-item:hover {
+    .list-item:not(.header):hover {
       cursor: pointer;
       background-color: $color-light-background;
     }
@@ -50,7 +50,7 @@
     &.header {
       font-weight: bold;
       border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-      margin-bottom: 4px;
+    //  margin-bottom: 4px;
       font-size: 110%;
     }
 

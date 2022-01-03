@@ -28,11 +28,14 @@
           <i>No dependencies</i>
         </div>
       </template>
+      <div class="row">
+        Members: {{ members.map((m) => m.alias) }}
+      </div>
     </template>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, toRef } from "vue";
+import { computed, defineComponent, ref, toRef } from "vue";
 import { useStore } from "vuex";
 import Icon from "@/components/Shared/Icon.vue";
 
@@ -53,7 +56,18 @@ export default defineComponent({
       return dep?.name;
     }
 
-    return { g, expanded, dependency };
+    const members = computed(() => {
+      console.log(g?.value?.id)
+      let servers = [...store.getters.servers];
+      let executables = [...store.getters.executables];
+      servers.push.apply(servers, executables);
+      servers = servers.filter((s) => {
+        return s.memberships.includes(g?.value?.id)
+      });
+      return servers
+    })
+
+    return { g, expanded, dependency, members };
   },
 });
 </script>

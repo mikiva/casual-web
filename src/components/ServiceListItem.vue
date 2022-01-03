@@ -1,8 +1,8 @@
 <template>
   <div
-    class="list-item expandable"
-    @click="expanded = !expanded"
-    :class="{ expanded: expanded }"
+      class="list-item expandable"
+      @click="expanded = !expanded"
+      :class="{ expanded: expanded }"
   >
     <div class="row center-height">
       <div class="flex-3">
@@ -22,6 +22,10 @@
     </div>
     <template v-if="expanded">
       <div class="expanded-content">
+        <h3>Metrics</h3>
+        <div class="row">{{ s.metric.invoked.count }}</div>
+        <div class="row">{{ s.metric.invoked.total }}</div>
+        <h3>Instances</h3>
         <div class="row" v-for="(instance, idx) in instances" :key="idx">
           <service-instance :instance="instance"></service-instance>
         </div>
@@ -61,10 +65,14 @@ export default defineComponent({
       return Transaction[s.value?.transaction];
     });
 
-    const instances = computed(() => {
       const sequential = s.value.instances.sequential;
+    const instances = computed(() => {
 
-      const inst = sequential.map((se) => store.getters.serverByPid(se.pid));
+      const inst = sequential.map((se) => {
+        let i = { ...store.getters.serverByPid(se.pid) }
+        i["ipc"] = store.getters.instanceByPid(se["pid"])["process"]["ipc"]
+        return i;
+      });
       return inst;
     });
 

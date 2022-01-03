@@ -42,6 +42,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Services Instances",
     component: () => import("@/views/ServicesInstances.vue"),
   },
+    {
+    path: "/queues",
+    name: "Queues",
+    component: () => import("@/views/Queues.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -1,7 +1,7 @@
 <template>
   <div class="pill">
     <span>
-      <slot></slot>
+      <strong><slot></slot></strong>
     </span>
   </div>
 </template>

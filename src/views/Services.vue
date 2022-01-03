@@ -1,13 +1,14 @@
 <template>
   <div class="card">
     <div class="row">
-      <h2>Services</h2>
+      <h2 class="flex-1">Services</h2>
+
     </div>
     <div class="row">
       <div class="list clickable">
         <div class="flex-1">
-          <input type="checkbox" id="admin-services" v-model="showAdmin" />
-          <label for="admin-services">Show admin services</label>
+          <input type="checkbox" id="admin-services" v-model="showAdmin"/>
+          <label for="admin-services">Include admin services</label>
         </div>
         <div class="row">
           <div class="list-item header">
@@ -20,9 +21,9 @@
           </div>
         </div>
         <service-list-item
-          :service="service"
-          v-for="service in services"
-          :key="service.id"
+            :service="service"
+            v-for="(service, idx) in services"
+            :key="idx"
         ></service-list-item>
       </div>
     </div>
@@ -42,15 +43,19 @@ export default defineComponent({
     const showAdmin = ref(false);
 
     const services = computed(() => {
-      let serv = store.getters.services;
-      if (!showAdmin.value)
-        serv = serv.filter(
-          (s) => ![".admin", ".deprecated"].includes(s["category"])
-        );
-      return serv;
+      let services = store.getters.services;
+      if (showAdmin.value) {
+        services.push(...adminServices.value);
+      }
+
+      return services;
     });
 
-    return { services, showAdmin };
+    const adminServices = computed(() => {
+      return store.getters.adminServices;
+    });
+
+    return { services, showAdmin, adminServices };
   },
 });
 </script>

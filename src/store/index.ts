@@ -8,12 +8,14 @@ interface Server {
 }
 
 export default createStore({
+  strict: true,
   state: {
     servers: [] as Server[],
     executables: [] as Server[],
     groups: [],
     services: [] as Service[],
     serviceInstances: {} as ServiceInstances,
+    queues: []
   },
   getters: {
     servers: function (state) {
@@ -33,8 +35,9 @@ export default createStore({
 
       state.servers.forEach((s) => {
         for (const inst of s.instances) {
-          inst["alias"] = s.alias;
-          instances.push(inst);
+          const i = { ...inst };
+          i["alias"] = s.alias;
+          instances.push(i);
         }
       });
       return instances;
@@ -44,8 +47,9 @@ export default createStore({
 
       state.executables.forEach((s) => {
         for (const inst of s.instances) {
-          inst["alias"] = s.alias;
-          instances.push(inst);
+          const i = { ...inst };
+          i["alias"] = s.alias;
+          instances.push(i);
         }
       });
       return instances;
@@ -63,19 +67,25 @@ export default createStore({
       };
     },
     services: function (state) {
-      return state.services;
+      return state.services.filter((s) =>
+        ![".admin", ".deprecated"].includes(s["category"])
+      );
+    },
+    adminServices: function (state) {
+      const services = state.services;
+      return services.filter((s) =>
+        [".admin", ".deprecated"].includes(s["category"])
+      );
     },
     serviceInstances: function (state, getters) {
       const services = state.services;
       const instances = [] as any[];
       services.forEach((service) => {
         for (const inst of service.instances.sequential) {
-          const i = inst;
+          const i = { ...inst };
           i["alias"] = getters.serverByPid(inst.pid).alias;
           i["name"] = service.name;
           Object.assign(i, getters.instanceByPid(inst.pid));
-          //const ins = store.getters.instanceByPid(inst.pid);
-          //console.log(ins)
 
           instances.push(i);
         }
@@ -94,6 +104,9 @@ export default createStore({
         return null;
       };
     },
+    queues: function (state) {
+      return state.queues;
+    },
   },
   mutations: {
     setServers: function (state, payload) {
@@ -111,24 +124,36 @@ export default createStore({
     setServiceInstances: function (state, payload) {
       state.serviceInstances = payload;
     },
+    setQueues: function (state, payload) {
+      payload.sort((a, b) => {
+        return a.name > b.name ? 1 : -1;
+      });
+      state.queues = payload;
+    },
   },
   actions: {
-    getDomain: function ({ commit }) {
+    fetchDomain: function ({ commit }) {
       return InformationService.getDomain().then((res) => {
         commit("setServers", res.servers);
         commit("setExecutables", res.executables);
         commit("setGroups", res.groups);
       });
     },
-    getServices: function ({ commit }) {
+    fetchServices: function ({ commit }) {
       return InformationService.getServices().then((res) => {
         commit("setServices", res.services);
         commit("setServiceInstances", res.instances);
       });
     },
+    fetchQueues: function ({ commit }) {
+      return InformationService.getQueues().then((res) => {
+        commit("setQueues", res.queues);
+      });
+    },
     fetchCasualData: function ({ dispatch }) {
-      const domain = dispatch("getDomain");
-      const services = dispatch("getServices");
+      const domain = dispatch("fetchDomain");
+      const services = dispatch("fetchServices");
+      const queues = dispatch("fetchQueues");
 
       return Promise.all([domain, services]).then((res) => {
         //  console.log(res)

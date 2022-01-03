@@ -3,8 +3,8 @@ FROM node:17.3.0-buster as BUILDER
 
 WORKDIR /app
 COPY package.json ./
-
-RUN npm install --verbose
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm install
 
 #RUN apt update && apt install python2 build-essential -y && npm ci
 
@@ -27,6 +27,6 @@ FROM casual/middleware:1.6-beta
 
 
 COPY --from=BUILDER /app/dist/ /opt/casual/nginx/html/
-COPY --from=BUILDER /app/configuration/domain.yaml /test/casual/configuration/domain.yaml
+COPY --from=BUILDER /app/example/configuration/domain.yaml /test/casual/configuration/domain.yaml
 
 
