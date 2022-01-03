@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  &.clickable {
+    .list-item:hover {
+      cursor: pointer;
+      background-color: $color-light-background;
+    }
+  }
 
   .list-item {
     display: flex;
@@ -30,10 +36,7 @@
         padding: 10px 0;
       }
 
-      &:hover {
-        cursor: pointer;
-        background-color: rgba(0, 0, 0, 0.05);
-      }
+
     }
 
     .card {

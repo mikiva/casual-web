@@ -1,5 +1,5 @@
 #FROM node:lts-buster-slim as BUILDER
-FROM node:14.17.6-buster as BUILDER
+FROM node:17.3.0-buster as BUILDER
 
 WORKDIR /app
 COPY package.json ./

@@ -4,7 +4,7 @@
       <h2>Services</h2>
     </div>
     <div class="row">
-      <div class="list">
+      <div class="list clickable">
         <div class="flex-1">
           <input type="checkbox" id="admin-services" v-model="showAdmin" />
           <label for="admin-services">Show admin services</label>
