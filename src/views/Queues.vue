@@ -12,6 +12,7 @@
       <div class="list-item header">
         <div class="row">
           <div class="flex-3">Name</div>
+          <div class="flex-1">Group</div>
           <div class="flex-1">Count</div>
           <div class="flex-1">Size</div>
         </div>

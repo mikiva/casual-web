@@ -2,10 +2,15 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+
   &.clickable {
-    .list-item:not(.header):hover {
-      cursor: pointer;
-      background-color: $color-light-background;
+    .list-item {
+      &:not(.non):not(.header) {
+        &:hover {
+          cursor: pointer;
+          background-color: $color-light-background;
+        }
+      }
     }
   }
 
@@ -21,22 +26,34 @@
       &:after {
         position: absolute;
         right: 10px;
-        content: "chevron_left";
+        top: 50%;
+        transform: translateY(-50%);
+        content: "expand_more";
         font-family: "Material Icons";
+
       }
 
       &.expanded {
-        padding-bottom: 10px;
+
         &:after {
-          content: "expand_more";
+          content: "expand_less";
 
         }
-      }
-      .expanded-content {
-        padding: 10px 0;
+        background-color: $color-light-background;
       }
 
 
+      & + .expand-content {
+        //  max-height: 0;
+        transition: max-height 0.1s ease-out;
+        overflow: hidden;
+
+        &.expanded {
+          border-left: 2px solid $color-dark-tint-1;
+          margin: 0 0 5px 5px;
+        }
+
+      }
     }
 
     .card {
@@ -50,7 +67,7 @@
     &.header {
       font-weight: bold;
       border-bottom: 2px solid rgba(0, 0, 0, 0.3);
-    //  margin-bottom: 4px;
+      //  margin-bottom: 4px;
       font-size: 110%;
     }
 

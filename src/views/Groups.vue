@@ -3,6 +3,7 @@
     <div class="row"><h2>Groups</h2></div>
     <div class="list clickable">
       <div class="list-item header"></div>
+
       <group-list-item
         :group="group"
         v-for="group in groups"

@@ -3,8 +3,9 @@
     <div class="row">
       <h2>Servers</h2>
     </div>
-    <div class="list">
+    <div class="list clickable">
       <div class="list-item header"></div>
+
       <server-list-item
         :server="server"
         v-for="server in servers"

@@ -141,16 +141,22 @@ export default createStore({
       state.serviceInstances = payload;
     },
     setQueues: function (state, payload) {
-      payload.sort((a, b) => {
+      const queues = payload.queues;
+      const groups = {};
+      for (const g of payload.groups) {
+        groups[g.process.pid] = g.name;
+      }
+      queues.forEach((q) => {
+        q.group = groups[q.group];
+      });
+      queues.sort((a, b) => {
         return a.name > b.name ? 1 : -1;
       });
-      state.queues = payload;
+      state.queues = queues;
     },
     setQueueMessages: function (state, payload) {
       const queue = state.queues.find((q) => q.name === payload.name) || {};
       queue["messages"] = payload.messages;
-      console.log(queue["messages"])
-//      state.queueMessages[payload.name] = payload.messages;
     },
     clearQueueMessages: function (state) {
       state.queueMessages = {};
@@ -173,7 +179,7 @@ export default createStore({
     },
     fetchQueues: function ({ commit }) {
       return InformationService.getQueues().then((res) => {
-        commit("setQueues", res.queues);
+        commit("setQueues", res);
         commit("clearQueueMessages")
       });
     },

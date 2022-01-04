@@ -15,15 +15,31 @@
 
 .button-icon {
   .material-icons {
-  font-size: 15px;
+    font-size: 15px;
   }
+
   &.large .material-icons {
-  font-size: 1.5em;
+    font-size: 1.5em;
   }
+
   background: none;
-  border:none;
+  border: none;
 
   &:hover {
     cursor: pointer;
   }
+}
+.loader {
+  border: 3px solid #f3f3f3; /* Light grey */
+  border-top: 3px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: block;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

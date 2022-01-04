@@ -1,5 +1,5 @@
 <template>
-  <div class="list-item" @click="expanded = !expanded">
+  <div class="list-item expandable" @click="expanded = !expanded" :class="{expanded: expanded}">
     <div class="row center-height">
       <div class="flex-4">
         <div>
@@ -7,29 +7,25 @@
           <div class="description">{{ g.note || "No note" }}</div>
         </div>
       </div>
-      <div>
-        <button class="button-icon">
-          <icon v-if="!expanded">chevron_left</icon>
-          <icon v-else>expand_more</icon>
-        </button>
-      </div>
     </div>
+  </div>
+  <div class="expand-content" :class="{expanded: expanded}">
+
     <template v-if="expanded">
-      <template v-if="g.dependencies.length > 0">
-        <div class="row">
-          <i>Dependencies</i>
+      <div class="flex-1">
+        <template v-if="g.dependencies.length > 0">
+          <div class="list-item">
+             Dependencies: {{ g.dependencies.map((d) => dependency(d)) }}
+          </div>
+        </template>
+        <template v-else>
+          <div class="row">
+            <i>No dependencies</i>
+          </div>
+        </template>
+        <div class="list-item">
+          Members: {{ members.map((m) => m.alias) }}
         </div>
-        <div class="row" v-for="dep in g.dependencies" :key="dep">
-          <strong>{{ dependency(dep) }}</strong>
-        </div>
-      </template>
-      <template v-else>
-        <div class="row">
-          <i>No dependencies</i>
-        </div>
-      </template>
-      <div class="row">
-        Members: {{ members.map((m) => m.alias) }}
       </div>
     </template>
   </div>
@@ -37,12 +33,9 @@
 <script lang="ts">
 import { computed, defineComponent, ref, toRef } from "vue";
 import { useStore } from "vuex";
-import Icon from "@/components/Shared/Icon.vue";
 
 export default defineComponent({
-  components: {
-    Icon,
-  },
+  components: {},
   props: {
     group: Object,
   },

@@ -9,6 +9,7 @@
 
 .row {
     display: flex;
+    position: relative;
     flex-direction: row;
     //margin-bottom: 4px;
     flex:1;
@@ -36,6 +37,12 @@
     }
     &-4 {
         flex: 4;
+    }
+}
+
+.p {
+    &-10 {
+        padding: 10px;
     }
 }
 
