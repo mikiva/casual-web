@@ -45,6 +45,10 @@
         </sidenav-nav>
       </div>
     </div>
+    <footer>
+      <i>casual</i>
+      <i class="version">{{ casual }}</i>
+    </footer>
   </div>
 </template>
 
@@ -78,8 +82,12 @@ export default defineComponent({
     const queueCount = computed(() => {
       return store.getters.queues.length;
     });
+    const casual = computed(() => {
+      const identity = store.getters.domainInfo?.identity;
+      return identity?.casual || "[version]";
+    });
 
-    return { serverCount, serviceCount, groupCount, executableCount, queueCount };
+    return {serverCount, serviceCount, groupCount, executableCount, queueCount, casual};
   },
 });
 </script>

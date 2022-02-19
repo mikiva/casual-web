@@ -3,12 +3,11 @@
     <div class="row">
       <div class="flex-2">
         <h4>{{ i.alias }}</h4>
-        <div>{{ i.pid }}</div>
       </div>
-      <div class="flex-1">{{ i.handle?.pid || i.handle }}</div>
-      <div class="flex-2" v-if="i.handle.ipc">{{ ipc }}</div>
+      <div class="flex-1">{{ pid }}</div>
+      <div class="flex-2">{{ipc}}</div>
       <div class="flex-1">
-        <pill>{{ state }}</pill>
+        <span>{{ state }}</span>
       </div>
     </div>
   </div>
@@ -27,7 +26,6 @@ enum State {
 }
 export default defineComponent({
   components: {
-    Pill,
   },
   props: {
     instance: {
@@ -43,10 +41,20 @@ export default defineComponent({
     });
     const ipc = computed(() => {
       const ipc = i.value.handle?.ipc;
-      const decoded = Buffer.from(ipc, "base64").toString("hex");
+      let decoded = "-";
+      if (ipc)
+        decoded = Buffer.from(ipc, "base64").toString("hex");
+
       return decoded;
     });
-    return { i, state, ipc };
+    const pid = computed(() => {
+      let pid = i.value.handle?.pid;
+      if (!pid)
+        pid = i.value.handle
+
+      return pid;
+    })
+    return { i, state, pid, ipc };
   },
 });
 </script>

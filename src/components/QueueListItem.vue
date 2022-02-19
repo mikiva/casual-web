@@ -8,20 +8,22 @@
         <h4>{{ q.name }}</h4>
       </div>
       <div class="flex-1">
-        <pill>{{ group }}</pill>
+        <span>{{ group }}</span>
       </div>
       <div class="flex-1">
-        <pill>{{ q.count }}</pill>
+        <span>{{ q.count }}</span>
       </div>
       <div class="flex-1">
-        <pill>{{ q.size }}</pill>
+        <span>{{ q.size }}</span>
       </div>
     </div>
   </div>
 
   <div class="expand-content" ref="container" :class="{expanded: expanded}">
     <template v-if="loading">
-      <span class="loader"></span>
+      <div class="p-10">
+        <span class="loader"></span>
+      </div>
     </template>
     <template v-if="expanded && !loading">
       <div ref="qMessages" class="flex-1 p-10">
@@ -39,16 +41,16 @@
           <div class="row">
             <div class="flex-3">{{ $fromBase64(message.id) }}</div>
             <div class="flex-1">
-              <pill>{{ message.size }}</pill>
+              <span>{{ message.size }}</span>
             </div>
             <div class="flex-1">
-              <pill>{{ state(message.state) }}</pill>
+              <span>{{ state(message.state) }}</span>
             </div>
             <div class="flex-1">
-              <pill>{{ message.type }}</pill>
+              <span>{{ message.type }}</span>
             </div>
             <div class="flex-1">
-              <pill>{{ $fromUnixtime(message.timestamp) }}</pill>
+              <span>{{ $fromUnixtime(message.timestamp) }}</span>
             </div>
           </div>
         </div>
@@ -68,9 +70,7 @@ import { useStore } from "vuex";
 import Pill from "@/components/Shared/Pill.vue";
 
 export default defineComponent({
-  components: {
-    Pill
-  },
+  components: {},
   props: {
     queue: {
       type: Object,

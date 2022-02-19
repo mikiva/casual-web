@@ -9,13 +9,16 @@
       </div>
     </div>
   </div>
-  <div class="expand-content" :class="{expanded: expanded}">
+  <div class="expand-content" :class="{ expanded: expanded }">
 
     <template v-if="expanded">
-      <div class="flex-1">
+      <div class="flex-1 p-10">
         <template v-if="g.dependencies.length > 0">
-          <div class="list-item">
-             Dependencies: {{ g.dependencies.map((d) => dependency(d)) }}
+          <div class="list-item header">
+            <i>Dependencies</i>
+          </div>
+          <div class="list-item" v-for="dep in g.dependencies" :key="dep.id">
+            {{ dependency(dep) }}
           </div>
         </template>
         <template v-else>
@@ -23,8 +26,19 @@
             <i>No dependencies</i>
           </div>
         </template>
-        <div class="list-item">
-          Members: {{ members.map((m) => m.alias) }}
+      </div>
+      <div class="p-10">
+
+        <div class="list-item header"><i>Members</i></div>
+        <div class="list-item" v-for="member in members" :key="member.alias">
+          <div class="row">
+            <div class="flex-4">
+              <strong>{{ member.alias }}</strong>
+            </div>
+            <div class="flex-1">
+              <pill>Instances: {{ member.instances.length }}</pill>
+            </div>
+          </div>
         </div>
       </div>
     </template>
@@ -33,9 +47,10 @@
 <script lang="ts">
 import { computed, defineComponent, ref, toRef } from "vue";
 import { useStore } from "vuex";
+import Pill from "@/components/Shared/Pill.vue";
 
 export default defineComponent({
-  components: {},
+  components: { Pill },
   props: {
     group: Object,
   },

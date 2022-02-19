@@ -9,7 +9,7 @@
       </div>
       <div class="flex-2">
         <pills>
-          <pill>Instances: {{ s.instances?.length }}</pill>
+          <pill>Instances: {{ instanceCount }}</pill>
         </pills>
       </div>
     </div>
@@ -73,6 +73,9 @@ export default defineComponent({
       }
       return instances;
     });
+    const instanceCount = computed(() => {
+      return instances.value.length;
+    });
 
     const memberships = computed(() => {
       const memberships = [] as any[];
@@ -87,7 +90,7 @@ export default defineComponent({
     })
 
 
-    return { s, expanded, instances, memberships };
+    return { s, expanded, instances, memberships , instanceCount};
   },
 });
 </script>

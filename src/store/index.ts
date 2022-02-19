@@ -12,16 +12,24 @@ interface Queue {
   messages: never[];
 }
 
+interface DomainInformation {
+  version: any;
+  runlevel: number;
+  identity: any;
+}
+
 export default createStore({
   strict: true,
   state: {
     servers: [] as Server[],
     executables: [] as Server[],
     groups: [],
+    information: {} as DomainInformation,
     services: [] as Service[],
     serviceInstances: {} as ServiceInstances,
     queues: [] as Queue[],
-    queueMessages: {}
+    queueMessages: {},
+
   },
   getters: {
     servers: function (state) {
@@ -71,6 +79,9 @@ export default createStore({
         const groups = state.groups;
         return groups.find((g) => g["id"] === id);
       };
+    },
+    domainInfo: function(state) {
+      return state.information;
     },
     services: function (state) {
       return state.services.filter((s) =>
@@ -134,6 +145,11 @@ export default createStore({
     setGroups: function (state, payload) {
       state.groups = payload;
     },
+    setInformation: function (state, payload) {
+      state.information.runlevel = payload.rl;
+      state.information.version = payload.version;
+      state.information.identity = payload.identity;
+    },
     setServices: function (state, payload) {
       state.services = payload;
     },
@@ -169,6 +185,11 @@ export default createStore({
         commit("setServers", res.servers);
         commit("setExecutables", res.executables);
         commit("setGroups", res.groups);
+        commit("setInformation", {
+          identity: res.identity,
+          version: res.version,
+          rl: res.runlevel,
+        });
       });
     },
     fetchServices: function ({ commit }) {
